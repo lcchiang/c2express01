@@ -33,11 +33,26 @@ var contacts = [
   },
 ];
 
+const getData = async () => {
+  let url = "https://pollysnips.s3.amazonaws.com/users.json";
+  try {
+    let res = await fetch(url)
+    contacts = await res.json();
+    console.log(contacts);
+  } catch (error) {
+    console.log("error");
+  }
+ };
+ 
+
+getData();
+
 app.get("/", function (req, res) {
   res.send("<h1> Hello Routes: try POST to /contact and GET /contacts </h1>");
 });
 // list all contacts
 app.get("/contacts", function (req, res) {
+
   res.json(contacts);
 });
 // add a contact
